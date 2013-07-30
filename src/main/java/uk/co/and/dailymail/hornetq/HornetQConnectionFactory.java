@@ -12,7 +12,7 @@ import org.hornetq.jms.client.HornetQXAConnectionFactory;
  */
 public class HornetQConnectionFactory 
 {    
-    public static ConnectionFactory makeConnectionFactory (String host, Long port) {
+    public static ConnectionFactory makeConnectionFactory (String host, Long port, Long timeout) {
         Map<String,Object> params = Maps.newHashMap();
         params.put("host", host);
         params.put("port", port);
@@ -24,6 +24,7 @@ public class HornetQConnectionFactory
         confs[0] = transportConf;
                         
         HornetQXAConnectionFactory connFactory = new HornetQXAConnectionFactory(false, confs);
+        connFactory.setCallTimeout(timeout);
         return connFactory;
     }
 }
